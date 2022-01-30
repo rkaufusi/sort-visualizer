@@ -8,7 +8,6 @@ import AppBarNav from './components/appBar.js'
 
 ReactDOM.render(
   <React.StrictMode>
-  
     <AppBarNav />
   </React.StrictMode>,
   document.getElementById('root')

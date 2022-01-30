@@ -19,7 +19,7 @@ const AppBarNav = () => {
   const [clicked, setClicked] = useState('')
   const [data, setData] = useState([])
 
-  let array = new Array(30)
+  
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -32,9 +32,12 @@ const AppBarNav = () => {
   const menuClick = (clicked) => {
     console.log(clicked)
     setClicked(clicked)
-    createData()
+    if(clicked === 'Load new data'){
+        createData()
+    }
   }
   const createData = () => {
+    let array = new Array(30)
     for(let i = 0; i < array.length; i++){
       array[i] = Math.floor(Math.random() * 100)
     }
@@ -43,9 +46,10 @@ const AppBarNav = () => {
 
   useEffect(()=> {
       createData()
+      
   },[])
 
-
+console.log(data)
   return (
     <div>
     <AppBar position="static">
@@ -106,7 +110,7 @@ const AppBarNav = () => {
         </Toolbar>
       </Container>
     </AppBar>
-    <App toDo={clicked} data={data}/>
+    <App toDo={clicked} randData={data}/>
     </div>
   );
 };
