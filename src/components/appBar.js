@@ -11,6 +11,7 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import App from '../App.js'
 import {useState, useEffect} from 'react'
+import bubbleSort from './sorting-algos/bubbleSort.js'
 
 const pages = ['Load new data', 'Bubble Sort', 'Insertion Sort', 'Selection Sort'];
 
@@ -19,6 +20,7 @@ const AppBarNav = () => {
   const [clicked, setClicked] = useState('')
   const [data, setData] = useState([])
 
+  console.log(bubbleSort)
   
 
   const handleOpenNavMenu = (event) => {
@@ -28,12 +30,41 @@ const AppBarNav = () => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
+/*
+  function bubble(array) {
+    let unSorted = true
+    let count = array.length
+
+     while(unSorted){
+      for(let i = 0; i < array.length; i++){
+        if(array[i] > array[i + 1]){
+          swap(i, i + 1, array)
+          setData(array)
+        }   
+      }
+      count--
+      if(count === 0) unSorted = false
+    }
+
+    // return array;
+  }
+  const swap = (i, j, array) => {
+    let temp = array[j]
+    array[j] = array[i]
+    array[i] = temp
+  }
+  */
+
 
   const menuClick = (clicked) => {
     console.log(clicked)
     setClicked(clicked)
     if(clicked === 'Load new data'){
         createData()
+    }
+    if(clicked === 'Bubble Sort'){
+      bubbleSort(data)
+      //bubble(data)
     }
   }
   const createData = () => {
@@ -46,7 +77,6 @@ const AppBarNav = () => {
 
   useEffect(()=> {
       createData()
-      
   },[])
 
 console.log(data)

@@ -10,7 +10,6 @@ export default function bubbleSort(array) {
 		count--
 		if(count === 0) unSorted = false
 	}
-	console.log(`sorted Array ` + array)
   return array;
 }
 const swap = (i, j, array) => {
