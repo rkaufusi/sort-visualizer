@@ -4,7 +4,7 @@ import Paper from '@mui/material/Paper';
 import bubbleSort from './sorting-algos/bubbleSort'
 
 export default function LenPaper({len}) {
-    console.log(len)
+    //console.log(len)
   return (
     <Box
       sx={{

@@ -12,6 +12,7 @@ import MenuItem from '@mui/material/MenuItem';
 import App from '../App.js'
 import {useState, useEffect} from 'react'
 import bubbleSort from './sorting-algos/bubbleSort.js'
+import { jaJP } from '@mui/x-data-grid';
 
 const pages = ['Load new data', 'Bubble Sort', 'Insertion Sort', 'Selection Sort'];
 
@@ -20,9 +21,8 @@ const AppBarNav = () => {
   const [clicked, setClicked] = useState('')
   const [data, setData] = useState([])
 
-  console.log(bubbleSort)
+  let passData = []
   
-
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -30,7 +30,35 @@ const AppBarNav = () => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-/*
+
+  const testA = () => {
+    for(let i = 0; i < data.length; i++){
+      if(data[i] > data[i + 1]){
+        swap(i, i + 1, data)
+      }
+    }
+    setData([...data])
+    console.log(data)
+  }
+
+  const bArray = (array) => {
+    for(let i = 0; i < array.length; i++){
+      for(let j = 0; j < array.length - i; j++){
+        //console.log(`comparing ` + array[i], array[j])
+        //console.log(array[i] <= array[j + 1] ? `comparing ${array[i], array[j + 1]}` : `swapping ${array[i], array[j + 1]}`)
+
+        if(array[j] > array[j + 1]){
+          swap(j, j + 1, array)
+        }
+
+        setData(array)
+        //console.log(data)
+      }
+    }
+    console.log(`new array ${array}`)
+    //return array
+  }
+
   function bubble(array) {
     let unSorted = true
     let count = array.length
@@ -39,32 +67,33 @@ const AppBarNav = () => {
       for(let i = 0; i < array.length; i++){
         if(array[i] > array[i + 1]){
           swap(i, i + 1, array)
-          setData(array)
-        }   
+        }
+        //setData(array) 
       }
       count--
-      if(count === 0) unSorted = false
+      if(count === 0) {
+        unSorted = false
+      }
     }
 
-    // return array;
+     return array;
   }
   const swap = (i, j, array) => {
     let temp = array[j]
     array[j] = array[i]
     array[i] = temp
+    //console.log(`swapped ` + array[i], array[j])
   }
-  */
-
+  
+  const [click, setClick] = useState('')
 
   const menuClick = (clicked) => {
     console.log(clicked)
-    setClicked(clicked)
     if(clicked === 'Load new data'){
         createData()
     }
     if(clicked === 'Bubble Sort'){
-      bubbleSort(data)
-      //bubble(data)
+        testA()
     }
   }
   const createData = () => {
@@ -130,7 +159,7 @@ console.log(data)
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={()=> menuClick(page)}
+                onClick={() => menuClick(page)}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}

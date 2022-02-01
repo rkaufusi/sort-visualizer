@@ -1,12 +1,15 @@
 import { create } from '@mui/material/styles/createTransitions';
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import './App.css';
 import Visualizer from './components/visualizer'
 import LenPaper from './components/paper'
 import bubbleSort from './components/sorting-algos/bubbleSort'
 
 
-function App({toDo, randData}) {
+function App({randData}) {
+console.log(`random data ` + randData)
+
+      
 
   return (
     <div className="App">
@@ -15,7 +18,7 @@ function App({toDo, randData}) {
         return (
           <LenPaper len={value}/>
         )
-      })}
+      })} 
 
     </div>
   );
