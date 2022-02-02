@@ -7,7 +7,7 @@ import bubbleSort from './components/sorting-algos/bubbleSort'
 
 
 function App({randData}) {
-console.log(`random data ` + randData)
+//console.log(`random data ` + randData)
 
       
 

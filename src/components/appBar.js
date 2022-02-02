@@ -20,6 +20,8 @@ const AppBarNav = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [clicked, setClicked] = useState('')
   const [data, setData] = useState([])
+  const [myCount, setMyCount] = useState(0)
+  
 
   let passData = []
   
@@ -30,15 +32,30 @@ const AppBarNav = () => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-
+  let temp = 30
   const testA = () => {
+    let len = data.length - 1
     for(let i = 0; i < data.length; i++){
-      if(data[i] > data[i + 1]){
-        swap(i, i + 1, data)
+      let bubbleInterval = setInterval(() => {
+        if(data[i] > data[i + 1]){
+          swap(i, i + 1, data)
+        }
+        setData([...data])
+      }, 2500)
+      temp--
+      console.log(`temp` + temp)
+      if(temp === 0){
+        console.log(`count ` + temp)
+        clearInterval(bubbleInterval)
       }
     }
+
+  }
+  const testB = () => {
+    if(data[0] > data[1]){
+      swap(0, 1, data)
+    }
     setData([...data])
-    console.log(data)
   }
 
   const bArray = (array) => {
@@ -94,6 +111,7 @@ const AppBarNav = () => {
     }
     if(clicked === 'Bubble Sort'){
         testA()
+        //testB()
     }
   }
   const createData = () => {
@@ -102,13 +120,14 @@ const AppBarNav = () => {
       array[i] = Math.floor(Math.random() * 100)
     }
     setData(array)
+    setMyCount(array.length)
   }
 
   useEffect(()=> {
       createData()
   },[])
 
-console.log(data)
+//console.log(data)
   return (
     <div>
     <AppBar position="static">
