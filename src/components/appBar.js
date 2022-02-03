@@ -32,54 +32,28 @@ const AppBarNav = () => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-  let temp = 30
-  const testA = () => {
-    let len = data.length - 1
-    for(let i = 0; i < data.length; i++){
-      let bubbleInterval = setInterval(() => {
-        if(data[i] > data[i + 1]){
-          swap(i, i + 1, data)
-        }
-        setData([...data])
-      }, 2500)
+
+  const mergeSort = () => {
+    let temp = 29
+    while(temp > 0){
+      for(let i = 0; i < data.length; i++){
+        setTimeout(() => {
+          if(data[i] > data[i + 1]){
+            swap(i, i + 1, data)
+          }
+          setData([...data])
+          console.log(i)
+        }, 2500) 
+      }
       temp--
-      console.log(`temp` + temp)
-      if(temp === 0){
-        console.log(`count ` + temp)
-        clearInterval(bubbleInterval)
-      }
+      console.log(temp)
     }
-
-  }
-  const testB = () => {
-    if(data[0] > data[1]){
-      swap(0, 1, data)
-    }
-    setData([...data])
   }
 
-  const bArray = (array) => {
-    for(let i = 0; i < array.length; i++){
-      for(let j = 0; j < array.length - i; j++){
-        //console.log(`comparing ` + array[i], array[j])
-        //console.log(array[i] <= array[j + 1] ? `comparing ${array[i], array[j + 1]}` : `swapping ${array[i], array[j + 1]}`)
-
-        if(array[j] > array[j + 1]){
-          swap(j, j + 1, array)
-        }
-
-        setData(array)
-        //console.log(data)
-      }
-    }
-    console.log(`new array ${array}`)
-    //return array
-  }
-
-  function bubble(array) {
+/*
+  const bubble = (array) => {
     let unSorted = true
     let count = array.length
-
      while(unSorted){
       for(let i = 0; i < array.length; i++){
         if(array[i] > array[i + 1]){
@@ -92,14 +66,12 @@ const AppBarNav = () => {
         unSorted = false
       }
     }
-
      return array;
-  }
+  }*/
   const swap = (i, j, array) => {
     let temp = array[j]
     array[j] = array[i]
     array[i] = temp
-    //console.log(`swapped ` + array[i], array[j])
   }
   
   const [click, setClick] = useState('')
@@ -110,8 +82,7 @@ const AppBarNav = () => {
         createData()
     }
     if(clicked === 'Bubble Sort'){
-        testA()
-        //testB()
+        mergeSort()
     }
   }
   const createData = () => {
