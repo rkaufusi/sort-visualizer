@@ -11,8 +11,7 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import App from '../App.js'
 import {useState, useEffect} from 'react'
-import bubbleSort from './sorting-algos/bubbleSort.js'
-import { jaJP } from '@mui/x-data-grid';
+//import bubbleSort from './sorting-algos/bubbleSort.js'
 
 const pages = ['Load new data', 'Bubble Sort', 'Insertion Sort', 'Selection Sort'];
 
@@ -33,7 +32,7 @@ const AppBarNav = () => {
     setAnchorElNav(null);
   };
 
-  const mergeSort = () => {
+  const bubbleSort = () => {
     let temp = 29
     while(temp > 0){
       for(let i = 0; i < data.length; i++){
