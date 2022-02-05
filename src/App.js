@@ -6,17 +6,17 @@ import LenPaper from './components/paper'
 import bubbleSort from './components/sorting-algos/bubbleSort'
 
 
-function App({randData}) {
-//console.log(`random data ` + randData)
-
-      
+function App({randData, myTest}) {
+// console.log(`random data ` + randData)
+  //console.log(myTest)
+// console.log(randData[myTest[0]], randData[myTest[1]]);
 
   return (
     <div className="App">
       <h3>Sort Visualizer</h3>
-      {randData.map((value) => {
+      {randData.map((value, index) => {
         return (
-          <LenPaper len={value}/>
+          <LenPaper len={value} idx={index} currIdx={myTest}/>
         )
       })} 
 

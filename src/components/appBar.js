@@ -31,7 +31,7 @@ const AppBarNav = () => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-
+/*
   const bubbleSort = () => {
     let temp = 29
     while(temp > 0){
@@ -48,7 +48,29 @@ const AppBarNav = () => {
       console.log(temp)
     }
   }
+*/
 
+const [test, setTest] = useState([0, 29])
+
+const bubbleSort = () => {
+  let temp = 29
+  while(temp > 0){
+    for(let i = 0; i < data.length; i++){
+      setTimeout(() => {
+        setTest([i, i + 1])
+        console.log(data[i], data[i + 1])
+        if(data[i] > data[i + 1]){
+          swap(i, i + 1, data)
+        }
+        setData([...data])
+        setTest([i, temp])
+        //console.log(i)
+      }, 2500) 
+    }
+    temp--
+    console.log(temp)
+  }
+}
 /*
   const bubble = (array) => {
     let unSorted = true
@@ -81,7 +103,7 @@ const AppBarNav = () => {
         createData()
     }
     if(clicked === 'Bubble Sort'){
-        mergeSort()
+        bubbleSort()
     }
   }
   const createData = () => {
@@ -158,7 +180,7 @@ const AppBarNav = () => {
         </Toolbar>
       </Container>
     </AppBar>
-    <App toDo={clicked} randData={data}/>
+    <App toDo={clicked} randData={data} myTest={test}/>
     </div>
   );
 };
