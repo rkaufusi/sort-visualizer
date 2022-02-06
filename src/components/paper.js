@@ -6,7 +6,8 @@ import {useState} from 'react'
 
 export default function LenPaper({len, idx, currIdx}) {
     //console.log(currIdx, idx)
-    const [tempA, setTempA] = useState(29)
+    const [tempA, setTempA] = useState(30)
+    const [currentIdx, setCurrentIdx] = useState(idx)
     const style = {
       backgroundColor: "#FF7F7F"
     }
@@ -14,10 +15,10 @@ export default function LenPaper({len, idx, currIdx}) {
       backgroundColor: "#90EE90"
 
     } 
-    let temp = 31
 
+    console.log(currIdx[1])
    // console.log(`tempA ` + tempA)
-    
+    // <Paper sx={idx === currIdx[0] || idx === currIdx[0] + 1 ? {...style} : idx > temp ? {...styleFinishedCol} : ''} elevation={2}/>
   return (
     <Box
       sx={{
@@ -29,7 +30,10 @@ export default function LenPaper({len, idx, currIdx}) {
         },
       }}
     >
-      <Paper sx={idx === currIdx[0] || idx === currIdx[0] + 1 ? {...style} : idx > temp ? {...styleFinishedCol} : ''} elevation={2}/>
+    {40 > currIdx[1] ? <Paper sx={idx === currIdx[0] || idx === currIdx[0] + 1 ? {...style} : ''} elevation={2}/> :
+    <Paper sx={{...styleFinishedCol}} elevation={2}/>
+    }
+      
     </Box>
   );
 }

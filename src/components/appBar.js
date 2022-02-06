@@ -51,24 +51,25 @@ const AppBarNav = () => {
 */
 
 const [test, setTest] = useState([0, 29])
+const [testA, setTestA] = useState()
 
 const bubbleSort = () => {
   let temp = 29
-  while(temp > 0){
-    for(let i = 0; i < data.length; i++){
+  let tempA = 0
+  while(tempA < 29){
+    for(let i = 0; i < data.length - 1 - tempA; i++){
       setTimeout(() => {
-        setTest([i, i + 1])
-        console.log(data[i], data[i + 1])
+        //setTest([i, data.length - 1 - tempA])
+        //console.log(data[i], data[i + 1])
         if(data[i] > data[i + 1]){
           swap(i, i + 1, data)
         }
         setData([...data])
-        setTest([i, temp])
-        //console.log(i)
+        setTest([i, data.length - 1 - tempA])
       }, 2500) 
     }
-    temp--
-    console.log(temp)
+    tempA++
+    
   }
 }
 /*
