@@ -31,30 +31,28 @@ const AppBarNav = () => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-/*
-  const bubbleSort = () => {
-    let temp = 29
-    while(temp > 0){
-      for(let i = 0; i < data.length; i++){
-        setTimeout(() => {
-          if(data[i] > data[i + 1]){
-            swap(i, i + 1, data)
-          }
-          setData([...data])
-          console.log(i)
-        }, 2500) 
-      }
-      temp--
-      console.log(temp)
-    }
-  }
-*/
+
 
 const [test, setTest] = useState([0, 29])
 const [testA, setTestA] = useState()
 
+const insertionSort = () => {
+  console.log(`called`)
+    for(let i = 1; i < data.length; i++){
+      let j = i;
+      while (j > 0 && data[j] < data[j - 1]){
+        swap(j, j - 1, data);
+        j -= 1;
+      }
+      console.log(data)
+      setData([...data])
+    }
+    console.log(data)
+    //return data;
+  }
+
 const bubbleSort = () => {
-  let temp = 29
+  //let temp = 29
   let tempA = 0
   while(tempA < 29){
     for(let i = 0; i < data.length - 1 - tempA; i++){
@@ -105,6 +103,10 @@ const bubbleSort = () => {
     }
     if(clicked === 'Bubble Sort'){
         bubbleSort()
+    }
+    if(clicked === 'Insertion Sort'){
+      console.log(`called Here`)
+      insertionSort()
     }
   }
   const createData = () => {
