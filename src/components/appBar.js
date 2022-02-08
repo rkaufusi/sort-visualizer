@@ -13,7 +13,7 @@ import App from '../App.js'
 import {useState, useEffect} from 'react'
 //import bubbleSort from './sorting-algos/bubbleSort.js'
 
-const pages = ['Load new data', 'Bubble Sort', 'Insertion Sort', 'Selection Sort'];
+const pages = ['Load new data', 'Bubble Sort', 'Insertion Sort', 'Selection Sort', 'Quick Sort', 'Merge Sort'];
 
 const AppBarNav = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -21,7 +21,6 @@ const AppBarNav = () => {
   const [data, setData] = useState([])
   const [myCount, setMyCount] = useState(0)
   
-
   let passData = []
   
   const handleOpenNavMenu = (event) => {
@@ -32,33 +31,50 @@ const AppBarNav = () => {
     setAnchorElNav(null);
   };
 
-
 const [test, setTest] = useState([0, 29])
 const [testA, setTestA] = useState()
 
-const insertionSort = () => {
-  console.log(`called`)
-    for(let i = 1; i < data.length; i++){
-      let j = i;
-      while (j > 0 && data[j] < data[j - 1]){
-        swap(j, j - 1, data);
-        j -= 1;
+const selectionSort = () => {
+    let startIndex = 0;
+    setTimeout(() => {
+      while (startIndex < data.length - 1){
+        let smallest = startIndex;
+          for(let i = startIndex + 1; i < data.length; i++){
+            if(data[smallest] > data[i]) smallest = i;
+            //setData([...data])
+            //console.log(data)
+          }
+        swap(startIndex, smallest, data)
+        startIndex++;
+        setData([...data])
+      }
+      //setData([...data])
+    }, 2500)
+    //return array;
+}
+
+  const insertionSort = () => {
+    console.log(`called`)
+      for(let i = 1; i < data.length; i++){
+        let j = i;
+        setTimeout(()=> {
+          while (j > 0 && data[j] < data[j - 1]){
+            swap(j, j - 1, data);
+            j -= 1;
+          }
+          console.log(data)
+          setData([...data])
+        }, 2500)
       }
       console.log(data)
-      setData([...data])
+      //return data;
     }
-    console.log(data)
-    //return data;
-  }
 
 const bubbleSort = () => {
-  //let temp = 29
   let tempA = 0
   while(tempA < 29){
     for(let i = 0; i < data.length - 1 - tempA; i++){
       setTimeout(() => {
-        //setTest([i, data.length - 1 - tempA])
-        //console.log(data[i], data[i + 1])
         if(data[i] > data[i + 1]){
           swap(i, i + 1, data)
         }
@@ -67,27 +83,8 @@ const bubbleSort = () => {
       }, 2500) 
     }
     tempA++
-    
   }
 }
-/*
-  const bubble = (array) => {
-    let unSorted = true
-    let count = array.length
-     while(unSorted){
-      for(let i = 0; i < array.length; i++){
-        if(array[i] > array[i + 1]){
-          swap(i, i + 1, array)
-        }
-        //setData(array) 
-      }
-      count--
-      if(count === 0) {
-        unSorted = false
-      }
-    }
-     return array;
-  }*/
   const swap = (i, j, array) => {
     let temp = array[j]
     array[j] = array[i]
@@ -97,16 +94,25 @@ const bubbleSort = () => {
   const [click, setClick] = useState('')
 
   const menuClick = (clicked) => {
-    console.log(clicked)
-    if(clicked === 'Load new data'){
+    switch(clicked){
+      case 'Load new data':
         createData()
-    }
-    if(clicked === 'Bubble Sort'){
+        break;
+      case 'Bubble Sort':
         bubbleSort()
-    }
-    if(clicked === 'Insertion Sort'){
-      console.log(`called Here`)
-      insertionSort()
+        break
+      case 'Insertion Sort':
+        insertionSort()
+        break
+      case 'Selection Sort':
+        selectionSort()
+        break
+      case 'Quick Sort':
+        console.log(`Quick Sort`)
+        break
+      case 'Merge Sort':
+        console.log(`Merge Sort`)
+        break
     }
   }
   const createData = () => {

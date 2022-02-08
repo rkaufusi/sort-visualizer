@@ -13,10 +13,11 @@ export default function LenPaper({len, idx, currIdx}) {
     }
     const styleFinishedCol = {
       backgroundColor: "#90EE90"
-
     } 
 
-    console.log(currIdx[1])
+    /*     */
+
+    //console.log(len)
    // console.log(`tempA ` + tempA)
     // <Paper sx={idx === currIdx[0] || idx === currIdx[0] + 1 ? {...style} : idx > temp ? {...styleFinishedCol} : ''} elevation={2}/>
   return (
