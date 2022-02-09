@@ -14,23 +14,19 @@ export default function LenPaper({len, idx, currIdx}) {
     const styleFinishedCol = {
       backgroundColor: "#90EE90"
     } 
+    const boxStyle = {
+      flexWrap: 'wrap',
+      '& > :not(style)': {
+        m: 1,
+        width: len * 10,
+        height: 10,
+      }
+    }
 
-    /*     */
-
-    //console.log(len)
-   // console.log(`tempA ` + tempA)
-    // <Paper sx={idx === currIdx[0] || idx === currIdx[0] + 1 ? {...style} : idx > temp ? {...styleFinishedCol} : ''} elevation={2}/>
+    console.log(idx, boxStyle)
+ 
   return (
-    <Box
-      sx={{
-        flexWrap: 'wrap',
-        '& > :not(style)': {
-          m: 1,
-          width: len * 10,
-          height: 10,
-        },
-      }}
-    >
+    <Box sx={{...boxStyle}}>
     {40 > currIdx[1] ? <Paper sx={idx === currIdx[0] || idx === currIdx[0] + 1 ? {...style} : ''} elevation={2}/> :
     <Paper sx={{...styleFinishedCol}} elevation={2}/>
     }

@@ -45,29 +45,24 @@ const selectionSort = () => {
             //console.log(data)
           }
         swap(startIndex, smallest, data)
-        startIndex++;
         setData([...data])
+        startIndex++;
       }
-      //setData([...data])
     }, 2500)
     //return array;
 }
 
   const insertionSort = () => {
-    console.log(`called`)
       for(let i = 1; i < data.length; i++){
         let j = i;
         setTimeout(()=> {
           while (j > 0 && data[j] < data[j - 1]){
             swap(j, j - 1, data);
             j -= 1;
-          }
-          console.log(data)
           setData([...data])
+          }
         }, 2500)
       }
-      console.log(data)
-      //return data;
     }
 
 const bubbleSort = () => {
