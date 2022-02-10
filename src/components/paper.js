@@ -23,7 +23,7 @@ export default function LenPaper({len, idx, currIdx}) {
       }
     }
 
-    console.log(idx, boxStyle)
+   // console.log(idx, boxStyle)
  
   return (
     <Box sx={{...boxStyle}}>

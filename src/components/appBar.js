@@ -33,7 +33,78 @@ const AppBarNav = () => {
 
 const [test, setTest] = useState([0, 29])
 const [testA, setTestA] = useState()
+/*
+const mergeSort = (array) => {
+  if(array.length <= 1) return array
+  const middle = Math.floor(array.length / 2)
+  const left = array.slice(0, middle)
+  const right = array.slice(middle)
+  //console.log(left, right)
+  console.log(left)
+  return mergeArray(mergeSort(left), mergeSort(right));
+}
+ 
+const mergeArray = (left, right) => {
+  const sorted = new Array(left.length + right.length)
+  console.log(sorted)
+  let k = 0;
+  let i = 0;
+  let j = 0;
+  while(i < left.length && j < right.length){
+    if(left[i] <= right[j]){
+      sorted[k++] = left[i++]
+    } else {
+      sorted[k++] = right[j++]
+    }
+  }
+  while(i < left.length) sorted[k++] = left[i++]
+  while(j < right.length) sorted[k++] = right[j++]
+  console.log(sorted)
+  return sorted
+}*/
 
+const mergeSort = () => {
+  if(data.length <= 1) return data
+	const helpArray = data.slice()
+	merge(data, 0, data.length - 1, helpArray)
+  console.log(data)
+    //setData([...data])
+  //return data;
+}
+console.log(data)
+
+const merge = (main, start, end, helpArray) => {
+	if (start === end) return;
+	const middle = Math.floor((start + end) / 2)
+  merge(helpArray, start, middle, main)
+	merge(helpArray, middle + 1, end, main)
+	mergeArray(main, start, middle, end, helpArray)
+}
+
+const mergeArray = (main, start, middle, end, helpArray) => {
+	let k = start
+	let i = start
+	let j = middle + 1
+
+  while(i <= middle && j <= end){
+      if (helpArray[i] <= helpArray[j]){
+        main[k++] = helpArray[i++]
+      } 
+      else {
+        main[k++] = helpArray[j++]
+      }
+  }
+  while (i <= middle){
+    main[k++] = helpArray[i++]
+    setData([...data])
+  }
+  while (j <= end){
+    main[k++] = helpArray[j++]
+    setData([...data])
+  }  
+}
+
+/*
 const selectionSort = () => {
     let startIndex = 0;
     setTimeout(() => {
@@ -50,7 +121,27 @@ const selectionSort = () => {
       }
     }, 2500)
     //return array;
+}*/
+const selectionSort = () => {
+  let startIndex = 0;
+
+    while (startIndex < data.length - 1){
+      (function(startIndex) {
+        setTimeout(function() {
+          let smallest = startIndex;
+          for(let i = startIndex + 1; i < data.length; i++){
+            if(data[smallest] > data[i]) smallest = i;
+          setData([...data])
+          }
+          swap(startIndex, smallest, data)
+          //setData([...data])
+        }, 2500)
+      })(startIndex++)
+    }
+
+  //return array;
 }
+
 
   const insertionSort = () => {
       for(let i = 1; i < data.length; i++){
@@ -106,7 +197,7 @@ const bubbleSort = () => {
         console.log(`Quick Sort`)
         break
       case 'Merge Sort':
-        console.log(`Merge Sort`)
+        mergeSort()
         break
     }
   }
