@@ -63,21 +63,57 @@ const mergeArray = (left, right) => {
   return sorted
 }*/
 
+const quickSort = () => {
+  helperFunc(data, 0, data.length - 1)
+  setData([...data])
+  //return data;
+}
+const helperFunc = async (array, startIdx, endIdx) => {
+	if(startIdx >= endIdx) return;
+	const pivotIdx = startIdx
+	let leftIdx = startIdx + 1
+	let rightIdx = endIdx
+	while(rightIdx >= leftIdx){
+    await new Promise(resolve => setTimeout(resolve, 200))
+    if(array[leftIdx] > array[pivotIdx] && array[rightIdx] < array[pivotIdx]){
+      swap(leftIdx, rightIdx, array)
+    }
+    //console.log(leftIdx, pivotIdx, rightIdx, '||', array[leftIdx], array[pivotIdx], array[rightIdx])
+      if(array[leftIdx] <= array[pivotIdx]) leftIdx++
+      if(array[rightIdx] >= array[pivotIdx]) rightIdx--
+      setData([...data])
+
+	}
+
+	swap(pivotIdx, rightIdx, array)
+	const left = rightIdx - 1 - startIdx < endIdx - (rightIdx + 1)
+	  if(left){
+		  helperFunc(array, startIdx, rightIdx - 1)
+		  helperFunc(array, rightIdx + 1, endIdx)
+	  }
+	  else {
+		  helperFunc(array, rightIdx + 1, endIdx)
+		  helperFunc(array, startIdx, rightIdx - 1)
+	  }
+    setData([...data])
+ }
+/*
 const mergeSort = () => {
   if(data.length <= 1) return data
 	const helpArray = data.slice()
 	merge(data, 0, data.length - 1, helpArray)
-  console.log(data)
-    //setData([...data])
+  //setData([...data])
   //return data;
 }
-console.log(data)
+
 
 const merge = (main, start, end, helpArray) => {
 	if (start === end) return;
 	const middle = Math.floor((start + end) / 2)
   merge(helpArray, start, middle, main)
 	merge(helpArray, middle + 1, end, main)
+  console.log(data)
+  //setData([...data])
 	mergeArray(main, start, middle, end, helpArray)
 }
 
@@ -89,20 +125,31 @@ const mergeArray = (main, start, middle, end, helpArray) => {
   while(i <= middle && j <= end){
       if (helpArray[i] <= helpArray[j]){
         main[k++] = helpArray[i++]
+        //setData([...data])
       } 
       else {
         main[k++] = helpArray[j++]
+        //setData([...data])
       }
   }
   while (i <= middle){
+
     main[k++] = helpArray[i++]
     setData([...data])
+
   }
   while (j <= end){
     main[k++] = helpArray[j++]
-    setData([...data])
+    //setData([...data])
   }  
 }
+*/
+/*
+(function(k, i) {
+  setTimeout(function() {
+    main[k] = helpArray[i]
+  }, 2500)
+  })(k++, i++)*/
 
 /*
 const selectionSort = () => {
@@ -134,14 +181,12 @@ const selectionSort = () => {
           setData([...data])
           }
           swap(startIndex, smallest, data)
-          //setData([...data])
+          setData([...data])
         }, 2500)
       })(startIndex++)
     }
-
   //return array;
 }
-
 
   const insertionSort = () => {
       for(let i = 1; i < data.length; i++){
@@ -171,11 +216,11 @@ const bubbleSort = () => {
     tempA++
   }
 }
-  const swap = (i, j, array) => {
-    let temp = array[j]
-    array[j] = array[i]
-    array[i] = temp
-  }
+const swap = (i, j, array) => {
+  let temp = array[j]
+  array[j] = array[i]
+  array[i] = temp
+}
   
   const [click, setClick] = useState('')
 
@@ -194,10 +239,10 @@ const bubbleSort = () => {
         selectionSort()
         break
       case 'Quick Sort':
-        console.log(`Quick Sort`)
+        quickSort()
         break
       case 'Merge Sort':
-        mergeSort()
+        //mergeSort()
         break
     }
   }
