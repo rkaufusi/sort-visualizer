@@ -5,7 +5,8 @@ import bubbleSort from './sorting-algos/bubbleSort'
 import {useState} from 'react'
 
 export default function LenPaper({len, idx, currIdx}) {
-    //console.log(currIdx, idx)
+    console.log(idx, currIdx)
+    if(idx === currIdx[0]) console.log(currIdx[0])
     const [tempA, setTempA] = useState(30)
     const [currentIdx, setCurrentIdx] = useState(idx)
     const style = {

@@ -13,7 +13,7 @@ import App from '../App.js'
 import {useState, useEffect} from 'react'
 //import bubbleSort from './sorting-algos/bubbleSort.js'
 
-const pages = ['Load new data', 'Bubble Sort', 'Insertion Sort', 'Selection Sort', 'Quick Sort', 'Merge Sort'];
+const pages = ['Load new data', 'Bubble Sort', 'Insertion Sort', 'Selection Sort', 'Quick Sort'];
 
 const AppBarNav = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -33,35 +33,6 @@ const AppBarNav = () => {
 
 const [test, setTest] = useState([0, 29])
 const [testA, setTestA] = useState()
-/*
-const mergeSort = (array) => {
-  if(array.length <= 1) return array
-  const middle = Math.floor(array.length / 2)
-  const left = array.slice(0, middle)
-  const right = array.slice(middle)
-  //console.log(left, right)
-  console.log(left)
-  return mergeArray(mergeSort(left), mergeSort(right));
-}
- 
-const mergeArray = (left, right) => {
-  const sorted = new Array(left.length + right.length)
-  console.log(sorted)
-  let k = 0;
-  let i = 0;
-  let j = 0;
-  while(i < left.length && j < right.length){
-    if(left[i] <= right[j]){
-      sorted[k++] = left[i++]
-    } else {
-      sorted[k++] = right[j++]
-    }
-  }
-  while(i < left.length) sorted[k++] = left[i++]
-  while(j < right.length) sorted[k++] = right[j++]
-  console.log(sorted)
-  return sorted
-}*/
 
 const quickSort = () => {
   helperFunc(data, 0, data.length - 1)
@@ -97,7 +68,7 @@ const helperFunc = async (array, startIdx, endIdx) => {
 	  }
     setData([...data])
  }
-/*
+
 const mergeSort = () => {
   if(data.length <= 1) return data
 	const helpArray = data.slice()
@@ -106,69 +77,58 @@ const mergeSort = () => {
   //return data;
 }
 
-
 const merge = (main, start, end, helpArray) => {
 	if (start === end) return;
 	const middle = Math.floor((start + end) / 2)
+  
   merge(helpArray, start, middle, main)
+  //setData([...data])
+
 	merge(helpArray, middle + 1, end, main)
   console.log(data)
   //setData([...data])
+ 
 	mergeArray(main, start, middle, end, helpArray)
 }
 
-const mergeArray = (main, start, middle, end, helpArray) => {
+const mergeArray = async (main, start, middle, end, helpArray) => {
 	let k = start
 	let i = start
 	let j = middle + 1
+  let isTrue = true
+
+  while(isTrue){
+    await new Promise(resolve => setTimeout(resolve, 200))
 
   while(i <= middle && j <= end){
-      if (helpArray[i] <= helpArray[j]){
-        main[k++] = helpArray[i++]
-        //setData([...data])
-      } 
-      else {
-        main[k++] = helpArray[j++]
-        //setData([...data])
-      }
+    if (helpArray[i] <= helpArray[j]){
+      main[k++] = helpArray[i++]
+      setData([...data])
+    } 
+    else {
+      main[k++] = helpArray[j++]
+      setData([...data])
+    }
+    console.log(data)
   }
-  while (i <= middle){
 
-    main[k++] = helpArray[i++]
-    setData([...data])
+    while (i <= middle){
+    await new Promise(resolve => setTimeout(resolve, 200))
 
-  }
-  while (j <= end){
-    main[k++] = helpArray[j++]
-    //setData([...data])
-  }  
+      main[k++] = helpArray[i++]
+      setData([...data])
+    }
+    while (j <= end){
+    await new Promise(resolve => setTimeout(resolve, 200))
+
+      main[k++] = helpArray[j++]
+      setData([...data])
+    }
+    if(j >= end) isTrue = false 
+} 
 }
-*/
-/*
-(function(k, i) {
-  setTimeout(function() {
-    main[k] = helpArray[i]
-  }, 2500)
-  })(k++, i++)*/
 
-/*
-const selectionSort = () => {
-    let startIndex = 0;
-    setTimeout(() => {
-      while (startIndex < data.length - 1){
-        let smallest = startIndex;
-          for(let i = startIndex + 1; i < data.length; i++){
-            if(data[smallest] > data[i]) smallest = i;
-            //setData([...data])
-            //console.log(data)
-          }
-        swap(startIndex, smallest, data)
-        setData([...data])
-        startIndex++;
-      }
-    }, 2500)
-    //return array;
-}*/
+ 
 const selectionSort = () => {
   let startIndex = 0;
 
@@ -185,19 +145,20 @@ const selectionSort = () => {
         }, 2500)
       })(startIndex++)
     }
-  //return array;
 }
 
-  const insertionSort = () => {
+  const insertionSort = async () => {
       for(let i = 1; i < data.length; i++){
         let j = i;
-        setTimeout(()=> {
+        //setTimeout(()=> {
           while (j > 0 && data[j] < data[j - 1]){
+            await new Promise(resolve => setTimeout(resolve, 200))
+            setTest([j, j - 1])
             swap(j, j - 1, data);
+            setData([...data])
             j -= 1;
-          setData([...data])
           }
-        }, 2500)
+        //}, 4500)
       }
     }
 
@@ -241,9 +202,7 @@ const swap = (i, j, array) => {
       case 'Quick Sort':
         quickSort()
         break
-      case 'Merge Sort':
-        //mergeSort()
-        break
+
     }
   }
   const createData = () => {
