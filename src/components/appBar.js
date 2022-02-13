@@ -46,14 +46,13 @@ const helperFunc = async (array, startIdx, endIdx) => {
 	let rightIdx = endIdx
 	while(rightIdx >= leftIdx){
     await new Promise(resolve => setTimeout(resolve, 200))
+    setTest([leftIdx, rightIdx])
     if(array[leftIdx] > array[pivotIdx] && array[rightIdx] < array[pivotIdx]){
       swap(leftIdx, rightIdx, array)
     }
-    //console.log(leftIdx, pivotIdx, rightIdx, '||', array[leftIdx], array[pivotIdx], array[rightIdx])
       if(array[leftIdx] <= array[pivotIdx]) leftIdx++
       if(array[rightIdx] >= array[pivotIdx]) rightIdx--
       setData([...data])
-
 	}
 
 	swap(pivotIdx, rightIdx, array)
@@ -68,83 +67,23 @@ const helperFunc = async (array, startIdx, endIdx) => {
 	  }
     setData([...data])
  }
-
-const mergeSort = () => {
-  if(data.length <= 1) return data
-	const helpArray = data.slice()
-	merge(data, 0, data.length - 1, helpArray)
-  //setData([...data])
-  //return data;
-}
-
-const merge = (main, start, end, helpArray) => {
-	if (start === end) return;
-	const middle = Math.floor((start + end) / 2)
-  
-  merge(helpArray, start, middle, main)
-  //setData([...data])
-
-	merge(helpArray, middle + 1, end, main)
-  console.log(data)
-  //setData([...data])
  
-	mergeArray(main, start, middle, end, helpArray)
-}
-
-const mergeArray = async (main, start, middle, end, helpArray) => {
-	let k = start
-	let i = start
-	let j = middle + 1
-  let isTrue = true
-
-  while(isTrue){
-    await new Promise(resolve => setTimeout(resolve, 200))
-
-  while(i <= middle && j <= end){
-    if (helpArray[i] <= helpArray[j]){
-      main[k++] = helpArray[i++]
-      setData([...data])
-    } 
-    else {
-      main[k++] = helpArray[j++]
-      setData([...data])
-    }
-    console.log(data)
-  }
-
-    while (i <= middle){
-    await new Promise(resolve => setTimeout(resolve, 200))
-
-      main[k++] = helpArray[i++]
-      setData([...data])
-    }
-    while (j <= end){
-    await new Promise(resolve => setTimeout(resolve, 200))
-
-      main[k++] = helpArray[j++]
-      setData([...data])
-    }
-    if(j >= end) isTrue = false 
-} 
-}
-
- 
-const selectionSort = () => {
+const selectionSort = async () => {
   let startIndex = 0;
-
-    while (startIndex < data.length - 1){
-      (function(startIndex) {
-        setTimeout(function() {
-          let smallest = startIndex;
-          for(let i = startIndex + 1; i < data.length; i++){
-            if(data[smallest] > data[i]) smallest = i;
-          setData([...data])
-          }
-          swap(startIndex, smallest, data)
-          setData([...data])
-        }, 2500)
-      })(startIndex++)
-    }
+  while (startIndex < data.length - 1){
+    let smallest = startIndex;
+    let i = startIndex + 1
+    for(i; i < data.length; i++){
+      if(data[smallest] > data[i]) smallest = i;
+        setData([...data])
+        await new Promise(resolve => setTimeout(resolve, 200))
+        setTest([smallest, i])
+      }
+      swap(startIndex, smallest, data)
+      setData([...data])
+      //setTest([smallest, i])
+      startIndex++
+  }
 }
 
   const insertionSort = async () => {
@@ -152,8 +91,9 @@ const selectionSort = () => {
         let j = i;
         //setTimeout(()=> {
           while (j > 0 && data[j] < data[j - 1]){
-            await new Promise(resolve => setTimeout(resolve, 200))
             setTest([j, j - 1])
+
+            await new Promise(resolve => setTimeout(resolve, 200))
             swap(j, j - 1, data);
             setData([...data])
             j -= 1;
@@ -161,22 +101,36 @@ const selectionSort = () => {
         //}, 4500)
       }
     }
-
-const bubbleSort = () => {
-  let tempA = 0
-  while(tempA < 29){
-    for(let i = 0; i < data.length - 1 - tempA; i++){
-      setTimeout(() => {
-        if(data[i] > data[i + 1]){
-          swap(i, i + 1, data)
+    const bubbleSort = async () => {
+      let tempA = 0
+      while(tempA < 29){
+        for(let i = 0; i < data.length - 1 - tempA; i++){
+          setTest([i + 1, i])
+          await new Promise(resolve => setTimeout(resolve, 200))
+            if(data[i] > data[i + 1]){
+              swap(i, i + 1, data)
+            }
+            setData([...data])
         }
-        setData([...data])
-        setTest([i, data.length - 1 - tempA])
-      }, 2500) 
+        tempA++
+      }
     }
-    tempA++
-  }
-}
+
+// const bubbleSort = () => {
+//   let tempA = 0
+//   while(tempA < 29){
+//     for(let i = 0; i < data.length - 1 - tempA; i++){
+//       setTimeout(() => {
+//         if(data[i] > data[i + 1]){
+//           swap(i, i + 1, data)
+//         }
+//         setData([...data])
+//         setTest([i, data.length - 1 - tempA])
+//       }, 2500) 
+//     }
+//     tempA++
+//   }
+// }
 const swap = (i, j, array) => {
   let temp = array[j]
   array[j] = array[i]

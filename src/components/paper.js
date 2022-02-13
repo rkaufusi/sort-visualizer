@@ -5,8 +5,8 @@ import bubbleSort from './sorting-algos/bubbleSort'
 import {useState} from 'react'
 
 export default function LenPaper({len, idx, currIdx}) {
-    console.log(idx, currIdx)
-    if(idx === currIdx[0]) console.log(currIdx[0])
+    //console.log(idx, currIdx)
+    //if(idx === currIdx[0]) console.log(currIdx[0])
     const [tempA, setTempA] = useState(30)
     const [currentIdx, setCurrentIdx] = useState(idx)
     const style = {
@@ -23,15 +23,17 @@ export default function LenPaper({len, idx, currIdx}) {
         height: 10,
       }
     }
+    console.log(idx, currIdx[0], currIdx[1])
 
-   // console.log(idx, boxStyle)
- 
+    // {idx === currIdx[0] && <Paper sx={{...style}} elevation={2}/>}
+    // {idx === currIdx[1] ? <Paper sx={{...style}} elevation={2}/> : ''}
+    //  <Paper elevation={2}/>
+ // <Paper sx={idx === currIdx[0] || idx === currIdx[1] ? {...style} : ''} elevation={2}/> 
   return (
     <Box sx={{...boxStyle}}>
-    {40 > currIdx[1] ? <Paper sx={idx === currIdx[0] || idx === currIdx[0] + 1 ? {...style} : ''} elevation={2}/> :
-    <Paper sx={{...styleFinishedCol}} elevation={2}/>
-    }
-      
+    <Paper sx={idx === currIdx[0] || idx === currIdx[1] ? {...style} : ''} elevation={2}/>
+
+    
     </Box>
   );
 }
