@@ -20,10 +20,10 @@ export default function LenPaper({len, idx, currIdx, isSorted}) {
 
   return (
     <Box sx={{...boxStyle}}>
-    {!isSorted ? <Paper sx={idx === currIdx[0] || idx === currIdx[1] ? {...style} : ''} elevation={2}/> :
-    <Paper sx={{...styleFinishedCol}} elevation={2}/>
-    }
-      
+      {
+        !isSorted ? <Paper sx={idx === currIdx[0] || idx === currIdx[1] ? {...style} : ''} elevation={2}/> :
+                    <Paper sx={{...styleFinishedCol}} elevation={2}/>
+      }
     </Box>
   );
 }

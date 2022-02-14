@@ -17,25 +17,18 @@ const pages = ['Load new data', 'Bubble Sort', 'Insertion Sort', 'Selection Sort
 const AppBarNav = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [data, setData] = useState([])
-  const [test, setTest] = useState([0, 1])
+  const [currentColumn, setCurrentColumn] = useState([0, 1])
   const [isSorted, setIsSorted] = useState(false);
 
   useEffect(()=> {
     createData()
   },[])
   
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
+  const handleOpenNavMenu = (event) => setAnchorElNav(event.currentTarget);
+  const handleCloseNavMenu = () => setAnchorElNav(null);
 
   const quickSort = async() => {
-    let count = 0
     await helperFunc(data, 0, data.length - 1)
-
     setData([...data])
     setIsSorted(true)
   }
@@ -47,7 +40,7 @@ const AppBarNav = () => {
 	  let rightIdx = endIdx
 	  while(rightIdx >= leftIdx){
       await new Promise(resolve => setTimeout(resolve, 200))
-      setTest([leftIdx, rightIdx])
+      setCurrentColumn([leftIdx, rightIdx])
       if(array[leftIdx] > array[pivotIdx] && array[rightIdx] < array[pivotIdx]){
         swap(leftIdx, rightIdx, array)
       }
@@ -78,7 +71,7 @@ const AppBarNav = () => {
         if(data[smallest] > data[i]) smallest = i;
           setData([...data])
           await new Promise(resolve => setTimeout(resolve, 200))
-          setTest([smallest, i])
+          setCurrentColumn([smallest, i])
       }
       swap(startIndex, smallest, data)
       setData([...data])
@@ -91,7 +84,7 @@ const AppBarNav = () => {
     for(let i = 1; i < data.length; i++){
       let j = i;
       while (j > 0 && data[j] < data[j - 1]){
-        setTest([j, j - 1])
+        setCurrentColumn([j, j - 1])
         await new Promise(resolve => setTimeout(resolve, 200))
         swap(j, j - 1, data);
         setData([...data])
@@ -105,7 +98,7 @@ const AppBarNav = () => {
     let temp = 0
     while(temp < 29){
       for(let i = 0; i < data.length - 1 - temp; i++){
-        setTest([i + 1, i])
+        setCurrentColumn([i + 1, i])
         await new Promise(resolve => setTimeout(resolve, 200))
           if(data[i] > data[i + 1]){
             swap(i, i + 1, data)
@@ -117,11 +110,11 @@ const AppBarNav = () => {
     setIsSorted(true)
   }
 
-const swap = (i, j, array) => {
-  let temp = array[j]
-  array[j] = array[i]
-  array[i] = temp
-}
+  const swap = (i, j, array) => {
+    let temp = array[j]
+    array[j] = array[i]
+    array[i] = temp
+  }
 
   const menuClick = (clicked) => {
     switch(clicked){
@@ -145,7 +138,7 @@ const swap = (i, j, array) => {
   const createData = () => {
     let array = new Array(30)
     for(let i = 0; i < array.length; i++){
-      array[i] = Math.floor(Math.random() * 100)
+      array[i] = Math.floor(Math.random() * 100 + 1)
     }
     setData(array)
     setIsSorted(false)
@@ -214,7 +207,7 @@ const swap = (i, j, array) => {
         </Toolbar>
       </Container>
     </AppBar>
-    <App randData={data} isSorted={isSorted} redAnime={test}/>
+    <App randData={data} isSorted={isSorted} redAnime={currentColumn}/>
     </div>
   );
 };
