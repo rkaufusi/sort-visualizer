@@ -11,17 +11,18 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import App from '../App.js'
 import {useState, useEffect} from 'react'
-//import bubbleSort from './sorting-algos/bubbleSort.js'
 
 const pages = ['Load new data', 'Bubble Sort', 'Insertion Sort', 'Selection Sort', 'Quick Sort'];
 
 const AppBarNav = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [clicked, setClicked] = useState('')
   const [data, setData] = useState([])
-  const [myCount, setMyCount] = useState(0)
-  
-  let passData = []
+  const [test, setTest] = useState([0, 1])
+  const [isSorted, setIsSorted] = useState(false);
+
+  useEffect(()=> {
+    createData()
+  },[])
   
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -31,25 +32,25 @@ const AppBarNav = () => {
     setAnchorElNav(null);
   };
 
-const [test, setTest] = useState([0, 29])
-const [testA, setTestA] = useState()
+  const quickSort = async() => {
+    let count = 0
+    await helperFunc(data, 0, data.length - 1)
 
-const quickSort = () => {
-  helperFunc(data, 0, data.length - 1)
-  setData([...data])
-  //return data;
-}
-const helperFunc = async (array, startIdx, endIdx) => {
-	if(startIdx >= endIdx) return;
-	const pivotIdx = startIdx
-	let leftIdx = startIdx + 1
-	let rightIdx = endIdx
-	while(rightIdx >= leftIdx){
-    await new Promise(resolve => setTimeout(resolve, 200))
-    setTest([leftIdx, rightIdx])
-    if(array[leftIdx] > array[pivotIdx] && array[rightIdx] < array[pivotIdx]){
-      swap(leftIdx, rightIdx, array)
-    }
+    setData([...data])
+    setIsSorted(true)
+  }
+
+  const helperFunc = async (array, startIdx, endIdx) => {
+	  if(startIdx >= endIdx) return;
+	  const pivotIdx = startIdx
+	  let leftIdx = startIdx + 1
+	  let rightIdx = endIdx
+	  while(rightIdx >= leftIdx){
+      await new Promise(resolve => setTimeout(resolve, 200))
+      setTest([leftIdx, rightIdx])
+      if(array[leftIdx] > array[pivotIdx] && array[rightIdx] < array[pivotIdx]){
+        swap(leftIdx, rightIdx, array)
+      }
       if(array[leftIdx] <= array[pivotIdx]) leftIdx++
       if(array[rightIdx] >= array[pivotIdx]) rightIdx--
       setData([...data])
@@ -58,86 +59,69 @@ const helperFunc = async (array, startIdx, endIdx) => {
 	swap(pivotIdx, rightIdx, array)
 	const left = rightIdx - 1 - startIdx < endIdx - (rightIdx + 1)
 	  if(left){
-		  helperFunc(array, startIdx, rightIdx - 1)
-		  helperFunc(array, rightIdx + 1, endIdx)
+		  await helperFunc(array, startIdx, rightIdx - 1)
+		  await helperFunc(array, rightIdx + 1, endIdx)
 	  }
 	  else {
-		  helperFunc(array, rightIdx + 1, endIdx)
-		  helperFunc(array, startIdx, rightIdx - 1)
+		  await helperFunc(array, rightIdx + 1, endIdx)
+		  await helperFunc(array, startIdx, rightIdx - 1)
 	  }
     setData([...data])
- }
+  }
  
-const selectionSort = async () => {
-  let startIndex = 0;
-  while (startIndex < data.length - 1){
-    let smallest = startIndex;
-    let i = startIndex + 1
-    for(i; i < data.length; i++){
-      if(data[smallest] > data[i]) smallest = i;
-        setData([...data])
-        await new Promise(resolve => setTimeout(resolve, 200))
-        setTest([smallest, i])
+  const selectionSort = async () => {
+    let startIndex = 0;
+    while (startIndex < data.length - 1){
+      let smallest = startIndex;
+      let i = startIndex + 1
+      for(i; i < data.length; i++){
+        if(data[smallest] > data[i]) smallest = i;
+          setData([...data])
+          await new Promise(resolve => setTimeout(resolve, 200))
+          setTest([smallest, i])
       }
       swap(startIndex, smallest, data)
       setData([...data])
-      //setTest([smallest, i])
       startIndex++
+    }
+    setIsSorted(true)
   }
-}
 
   const insertionSort = async () => {
-      for(let i = 1; i < data.length; i++){
-        let j = i;
-        //setTimeout(()=> {
-          while (j > 0 && data[j] < data[j - 1]){
-            setTest([j, j - 1])
+    for(let i = 1; i < data.length; i++){
+      let j = i;
+      while (j > 0 && data[j] < data[j - 1]){
+        setTest([j, j - 1])
+        await new Promise(resolve => setTimeout(resolve, 200))
+        swap(j, j - 1, data);
+        setData([...data])
+        j -= 1;
+      }
+    }
+    setIsSorted(true)
+  }
 
-            await new Promise(resolve => setTimeout(resolve, 200))
-            swap(j, j - 1, data);
-            setData([...data])
-            j -= 1;
+  const bubbleSort = async () => {
+    let temp = 0
+    while(temp < 29){
+      for(let i = 0; i < data.length - 1 - temp; i++){
+        setTest([i + 1, i])
+        await new Promise(resolve => setTimeout(resolve, 200))
+          if(data[i] > data[i + 1]){
+            swap(i, i + 1, data)
           }
-        //}, 4500)
+          setData([...data])
       }
+      temp++
     }
-    const bubbleSort = async () => {
-      let tempA = 0
-      while(tempA < 29){
-        for(let i = 0; i < data.length - 1 - tempA; i++){
-          setTest([i + 1, i])
-          await new Promise(resolve => setTimeout(resolve, 200))
-            if(data[i] > data[i + 1]){
-              swap(i, i + 1, data)
-            }
-            setData([...data])
-        }
-        tempA++
-      }
-    }
+    setIsSorted(true)
+  }
 
-// const bubbleSort = () => {
-//   let tempA = 0
-//   while(tempA < 29){
-//     for(let i = 0; i < data.length - 1 - tempA; i++){
-//       setTimeout(() => {
-//         if(data[i] > data[i + 1]){
-//           swap(i, i + 1, data)
-//         }
-//         setData([...data])
-//         setTest([i, data.length - 1 - tempA])
-//       }, 2500) 
-//     }
-//     tempA++
-//   }
-// }
 const swap = (i, j, array) => {
   let temp = array[j]
   array[j] = array[i]
   array[i] = temp
 }
-  
-  const [click, setClick] = useState('')
 
   const menuClick = (clicked) => {
     switch(clicked){
@@ -156,7 +140,6 @@ const swap = (i, j, array) => {
       case 'Quick Sort':
         quickSort()
         break
-
     }
   }
   const createData = () => {
@@ -165,20 +148,14 @@ const swap = (i, j, array) => {
       array[i] = Math.floor(Math.random() * 100)
     }
     setData(array)
-    setMyCount(array.length)
+    setIsSorted(false)
   }
 
-  useEffect(()=> {
-      createData()
-  },[])
-
-//console.log(data)
   return (
     <div>
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -210,11 +187,15 @@ const swap = (i, j, array) => {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                <button onClick={() => console.log(page)}>
                   <Typography textAlign="center">
-                    {page}
+                    <Button
+                      key={page}
+                      onClick={() => menuClick(page)}
+                      sx={{color: 'black'}}
+                    >
+                      {page}
+                    </Button>
                   </Typography>
-                  </button>
                 </MenuItem>
               ))}
             </Menu>
@@ -233,7 +214,7 @@ const swap = (i, j, array) => {
         </Toolbar>
       </Container>
     </AppBar>
-    <App toDo={clicked} randData={data} myTest={test}/>
+    <App randData={data} isSorted={isSorted} redAnime={test}/>
     </div>
   );
 };
